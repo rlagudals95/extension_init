@@ -1,19 +1,6 @@
-try {
-  console.log(
-    "  document.getElementsByTagName(BODY):",
-    document.getElementsByTagName("BODY")
-  );
+import { isCollectableUrl } from "@src/helpers/isCollectableUrl";
+import { scrapTriggerElement } from "../popup";
 
-  // 쿠팡 상품정보 더보기 버튼 클릭
-  setTimeout(() => {
-    const moreBtn = document.querySelector(
-      ".product-detail-seemore-btn"
-    ) as unknown as HTMLElement;
-
-    if (moreBtn) {
-      moreBtn.click();
-    }
-  }, 2000);
-} catch (e) {
-  console.error(e);
+if (isCollectableUrl(window.location.href)) {
+  document.body.append(scrapTriggerElement());
 }

@@ -36,7 +36,6 @@ export default ({ mode, command }) => {
           plugins: ["@babel/plugin-proposal-decorators"],
         },
       }),
-      //eslint(),
     ],
 
     publicDir,
