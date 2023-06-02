@@ -12,7 +12,7 @@ export interface ManifestType {
   action?: any;
   author?: string | undefined;
 
-  browser_action?: {} | undefined;
+  browser_action?: object | undefined;
 
   background?:
     | {
