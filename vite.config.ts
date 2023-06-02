@@ -23,7 +23,6 @@ export default ({ mode, command }) => {
       },
     },
     plugins: [
-
       makeManifest(),
       copyContentStyle(),
       splitVendorChunkPlugin(),
