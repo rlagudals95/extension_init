@@ -1,6 +1,6 @@
 export const getCookie = chrome?.cookies.getAll(
   {
-    domain: "ohoolabs.com",
+    domain: "ohoolabs-solution.com",
   },
   function (cookies) {
     for (let i = 0; i < cookies.length; i++) {
