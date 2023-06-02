@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/tslint/config */
 export function getName(code: string): string {
   switch (code) {
     case "en":

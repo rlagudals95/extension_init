@@ -2,8 +2,10 @@ import { defineConfig, loadEnv } from "vite";
 import { resolve } from "path";
 import makeManifest from "./utils/plugins/make-manifest";
 import copyContentStyle from "./utils/plugins/copy-content-style";
-import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+import rollupNodePolyFill from "rollup-plugin-node-polyfills";
 import { splitVendorChunkPlugin } from "vite";
+import { ViteMinifyPlugin } from "vite-plugin-minify";
+import babel from "vite-plugin-babel";
 
 const root = resolve(__dirname, "src");
 const pagesDir = resolve(root, "pages");
@@ -26,6 +28,14 @@ export default ({ mode, command }) => {
       makeManifest(),
       copyContentStyle(),
       splitVendorChunkPlugin(),
+      ViteMinifyPlugin({}),
+      babel({
+        babelConfig: {
+          babelrc: false,
+          configFile: false,
+          plugins: ["@babel/plugin-proposal-decorators"],
+        },
+      }),
       //eslint(),
     ],
 
@@ -45,20 +55,15 @@ export default ({ mode, command }) => {
         output: {
           entryFileNames: (chunk) => `src/pages/${chunk.name}/index.js`,
         },
+        plugins: [rollupNodePolyFill()],
       },
     },
     optimizeDeps: {
       esbuildOptions: {
-        // Node.js global to browser globalThis
         define: {
           global: "globalThis",
         },
-        // Enable esbuild polyfill plugins
-        plugins: [
-          // NodeGlobalsPolyfillPlugin({
-          //   buffer: true,
-          // })
-        ],
+        plugins: [],
       },
     },
   });
